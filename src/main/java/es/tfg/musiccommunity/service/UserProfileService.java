@@ -80,6 +80,14 @@ public class UserProfileService implements IUserProfileService, UserDetailsServi
 		String jwt = jwtProvider.generateJwtToken(authentication);
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
+
+        Optional<UserProfile> u = userProfileRepository.findByLogin(loginRequest.getLogin());
+        if (u.isPresent()) {
+            UserProfile user = u.get();
+            user.setFirebaseToken(loginRequest.getFirebaseToken());
+            userProfileRepository.save(user);
+        }
+
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
 	}
 
@@ -102,7 +110,7 @@ public class UserProfileService implements IUserProfileService, UserDetailsServi
 		}
 
 		UserProfile user = new UserProfile(signUpRequest.getLogin(), signUpRequest.getEmail(),
-				encoder.encode(signUpRequest.getPassword()), signUpRequest.getPhone());
+				encoder.encode(signUpRequest.getPassword()), signUpRequest.getPhone(), signUpRequest.getFirebaseToken());
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();

@@ -94,9 +94,9 @@ public class AnnouncementServiceTest {
     @Test
     public void getAllAnnouncementsTest(){
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         user1 = userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2);
+        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2, "");
         user2 = userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -145,9 +145,9 @@ public class AnnouncementServiceTest {
     @Test
     public void getAnnouncementInfoTest() {
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2);
+        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -185,7 +185,7 @@ public class AnnouncementServiceTest {
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
         /* Añadimos un usuario para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -203,10 +203,10 @@ public class AnnouncementServiceTest {
     @Test
     public void deleteAnnouncementUnauthorizedUserTest() {
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2);
+        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -224,9 +224,9 @@ public class AnnouncementServiceTest {
     @Test
     public void deleteAnnouncementTest() {
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2);
+        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -270,7 +270,7 @@ public class AnnouncementServiceTest {
         Assert.assertEquals(HttpStatus.NOT_FOUND, created.getStatusCode());
         Assert.assertEquals(null, created.getBody());
 
-        UserProfile user1 = new UserProfile(LUISIN, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(LUISIN, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
         /* NO EXISTE LA CIUDAD */
         ResponseEntity<Long> created2 = announcementService.createAnnouncement(user1.getLogin(), anData);
@@ -290,7 +290,7 @@ public class AnnouncementServiceTest {
 
     @Test
     public void createAnnouncementTest() {
-        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(US_1, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
         City city = new City(SEV, ESP, LATITUDE_SEV, LONGITUDE_SEV);
         cityRepository.save(city);
@@ -325,13 +325,13 @@ public class AnnouncementServiceTest {
 
     @Test
     public void updateAnnouncementUnauthorizedUserTest() {
-        UserProfile user1 = new UserProfile(LUISIN, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(LUISIN, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
         City city = new City(SANT, ESP, LATITUDE_SANT, LONGITUDE_SANT);
         cityRepository.save(city);
         Announcement a1 = new Announcement(TITLE_1, city, user1, DESCRI_2, LocalDate.now().plusDays(3), CONT_PHONE_1, new HashSet<>());
         announcementRepository.save(a1);
-        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2);
+        UserProfile user2 = new UserProfile(US_2, US_2_MAIL, US_2, PHONE_NUMBER_2, "");
         userProfileRepository.save(user2);
         AnnouncementDto updatedAn = new AnnouncementDto(null, null, null, null, SANT, LUISIN, null, LocalDate.now(),CONT_PHONE_5, new ArrayList<>());
         ResponseEntity<Long> updated = announcementService.updateAnnouncement(user2.getLogin(), updatedAn, a1.getId());
@@ -349,7 +349,7 @@ public class AnnouncementServiceTest {
 
     @Test
     public void updateAnnouncementUnexistentUserAndUnexistentCityTest(){
-        UserProfile user1 = new UserProfile(LUISIN, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(LUISIN, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
         City city = new City(SANT, ESP, LATITUDE_SANT, LONGITUDE_SANT);
         cityRepository.save(city);
@@ -369,7 +369,7 @@ public class AnnouncementServiceTest {
 
     @Test
     public void updateAnnouncementTest() {
-        UserProfile user1 = new UserProfile(LUISIN, US_1_MAIL, US_1, PHONE_NUMBER_1);
+        UserProfile user1 = new UserProfile(LUISIN, US_1_MAIL, US_1, PHONE_NUMBER_1, "");
         userProfileRepository.save(user1);
         City city = new City(SEV, ESP, LATITUDE_SEV, LONGITUDE_SEV);
         city = cityRepository.save(city);

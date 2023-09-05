@@ -99,7 +99,7 @@ public class TagServiceTest {
         Assert.assertEquals(HttpStatus.OK, tagsDto.getStatusCode());
 
         /* AHORA UN USUARIO AÑADIRÁ NUEVAS ETIQUETAS AL EDITAR SU PERFIL */
-        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, LUISIN_PHONE);
+        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, LUISIN_PHONE, "");
         userProfileRepository.save(luisin);
         TagDto t3 = new TagDto(ETIQUETA_3);
         TagDto t4 = new TagDto(ETIQUETA_4);
@@ -127,7 +127,7 @@ public class TagServiceTest {
         Assert.assertEquals(HttpStatus.OK, tagsDto.getStatusCode());
 
         /* AHORA UN USUARIO AÑADIRÁ NUEVAS ETIQUETAS (UNA NUEVA Y OTRA EXISTENTE) AL EDITAR SU PERFIL */
-        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, LUISIN_PHONE);
+        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, LUISIN_PHONE, "");
         userProfileRepository.save(luisin);
         TagDto t3 = new TagDto(ETIQUETA_2);
         TagDto t4 = new TagDto(ETIQUETA_4);
@@ -162,7 +162,7 @@ public class TagServiceTest {
         Assert.assertEquals(HttpStatus.OK, tagsDto.getStatusCode());
 
         /* AHORA UN USUARIO AÑADIRÁ NUEVAS ETIQUETAS (UNA NUEVA Y OTRA EXISTENTE) AL EDITAR SU PERFIL */
-        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, LUISIN_PHONE);
+        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, LUISIN_PHONE, "");
         userProfileRepository.save(luisin);
         TagDto t3 = new TagDto(ETIQUETA_2);
         TagDto t4 = new TagDto(ETIQUETA_4);
@@ -183,7 +183,7 @@ public class TagServiceTest {
         Assert.assertEquals(HttpStatus.OK, users2.getStatusCode());
         Assert.assertEquals(LUISIN, users2.getBody().get(0).getLogin());
 
-        UserProfile alonsin = new UserProfile(ALONSIN, ALONSIN_MAIL, ALONSIN, ALONSIN_PHONE);
+        UserProfile alonsin = new UserProfile(ALONSIN, ALONSIN_MAIL, ALONSIN, ALONSIN_PHONE, "");
         userProfileRepository.save(alonsin);
         List<TagDto> tags2 = new ArrayList<>(5);
         tags2.add(new TagDto(t1.getTagName()));
@@ -207,7 +207,7 @@ public class TagServiceTest {
 
     @Test
     public void getAllPostsByTagNameTest() {
-        UserProfile alonsin = new UserProfile(ALONSIN, ALONSIN_MAIL, ALONSIN, ALONSIN_PHONE);
+        UserProfile alonsin = new UserProfile(ALONSIN, ALONSIN_MAIL, ALONSIN, ALONSIN_PHONE, "");
         userProfileRepository.save(alonsin);
 
         Tag t1 = new Tag(ETIQUETA_1);

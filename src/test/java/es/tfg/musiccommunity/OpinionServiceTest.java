@@ -84,9 +84,9 @@ public class OpinionServiceTest {
 
     @Test
     public void getAllOpinionsTest() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         user1 = userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         user2 = userProfileRepository.save(user2);
 
         File prueba = new File(FILE_PRUEBA);
@@ -141,9 +141,9 @@ public class OpinionServiceTest {
 
     @Test
     public void getOpinionInfoTest() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         user1 = userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         user2 = userProfileRepository.save(user2);
 
         File prueba = new File(FILE_PRUEBA_2);
@@ -204,7 +204,7 @@ public class OpinionServiceTest {
         MultipartFile multipart2 = new MockMultipartFile(prueba2.getName(), prueba2.getName(), PDF_EXT, input2);
 
         /* Añadimos un usuario para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user1 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user1);
 
         Score newScore2 = new Score(multipart2.getOriginalFilename(), multipart2.getContentType(), multipart2.getBytes(), user1);
@@ -224,10 +224,10 @@ public class OpinionServiceTest {
         FileInputStream input = new FileInputStream(prueba);
         MultipartFile multipart = new MockMultipartFile(prueba.getName(), prueba.getName(), PDF_EXT, input);
 
-        UserProfile user1 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user1 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user2 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user2);
 
         Score newScore2 = new Score(multipart.getOriginalFilename(), multipart.getContentType(), multipart.getBytes(), user1);
@@ -247,7 +247,7 @@ public class OpinionServiceTest {
         FileInputStream input = new FileInputStream(test);
         MultipartFile multipart = new MockMultipartFile(test.getName(), test.getName(), PDF_EXT, input);
 
-        UserProfile user1 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user1 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user1);
 
         Score newScore2 = new Score(multipart.getOriginalFilename(), multipart.getContentType(), multipart.getBytes(), user1);
@@ -268,7 +268,7 @@ public class OpinionServiceTest {
 
     @Test
     public void createOpinionUnexistentScoreAndUserTest() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         ScoreDto unexistentScoreDto = new ScoreDto(-1L, TITULO_1, PDF_EXT, UNEXISTENT, null);
@@ -292,7 +292,7 @@ public class OpinionServiceTest {
 
     @Test
     public void createOpinionTest() throws IOException {
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         File prueba = new File(FILE_PRUEBA_2);
@@ -328,9 +328,9 @@ public class OpinionServiceTest {
 
     @Test
     public void updateOpinionUnexistentOrUnauthorizedUser() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         File test = new File(FILE_TEST);
@@ -355,7 +355,7 @@ public class OpinionServiceTest {
 
     @Test
     public void updateOpinionTest() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         File test = new File(FILE_TEST);

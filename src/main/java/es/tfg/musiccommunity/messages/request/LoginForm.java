@@ -12,9 +12,12 @@ public class LoginForm {
     @Size(min = 6, max = 40)
     private String password;
 
-    public LoginForm(String login, String password) {
+    private String firebaseToken;
+
+    public LoginForm(String login, String password, String firebaseToken) {
         this.login = login;
         this.password = password;
+        this.firebaseToken = firebaseToken;
     }
 
     public String getLogin() {
@@ -31,5 +34,13 @@ public class LoginForm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirebaseToken() {
+        return firebaseToken;
+    }
+
+    public void setFirebaseToken(String firebaseToken) {
+        this.firebaseToken = firebaseToken;
     }
 }

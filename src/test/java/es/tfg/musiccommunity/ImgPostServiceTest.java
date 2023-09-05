@@ -55,10 +55,10 @@ public class ImgPostServiceTest {
 
     @Test
     public void unexistentUnauthorizedAndStoreImgPostTest() throws IOException {
-        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1);
+        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1, "");
         userProfileRepository.save(user);
 
-        UserProfile user2 = new UserProfile(USER_2, USER_2_MAIL, USER_2, NUMBER_2);
+        UserProfile user2 = new UserProfile(USER_2, USER_2_MAIL, USER_2, NUMBER_2, "");
         userProfileRepository.save(user2);
 
         File img1 = new File(IMG_PRUEBA);
@@ -80,7 +80,7 @@ public class ImgPostServiceTest {
 
     @Test
     public void invalidExtensionStoreImgPostTest() throws IOException {
-        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1);
+        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1, "");
         userProfileRepository.save(user);
 
         Discussion d1 = new Discussion(TIT_1, user, DESCR_1, new HashSet<>());
@@ -96,7 +96,7 @@ public class ImgPostServiceTest {
 
     @Test
     public void storeImgPostTest() throws IOException {
-        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1);
+        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1, "");
         userProfileRepository.save(user);
 
         Discussion d1 = new Discussion(TIT_1, user, DESCR_1, new HashSet<>());
@@ -118,7 +118,7 @@ public class ImgPostServiceTest {
 
     @Test
     public void getUnexistentPostAndNoImgPostTest() {
-        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1);
+        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1, "");
         userProfileRepository.save(user);
 
         ResponseEntity<Resource> unexistentPost = imgPostService.getImgFile(-1L);
@@ -133,7 +133,7 @@ public class ImgPostServiceTest {
 
     @Test
     public void getImgPostTest() throws IOException {
-        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1);
+        UserProfile user = new UserProfile(USER_1, USER_1_MAIL, USER_1, NUMBER_1, "");
         userProfileRepository.save(user);
 
         Discussion d1 = new Discussion(TIT_1, user, DESCR_1, new HashSet<>());

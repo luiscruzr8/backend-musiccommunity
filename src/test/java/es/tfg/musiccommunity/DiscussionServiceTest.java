@@ -82,9 +82,9 @@ public class DiscussionServiceTest {
     @Test
     public void getAllDiscussionsTest(){
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1);
+        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1, "");
         user1 = userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2);
+        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2, "");
         user2 = userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -130,9 +130,9 @@ public class DiscussionServiceTest {
     @Test
     public void getDiscussionInfoTest() {
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1);
+        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2);
+        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos 2 anuncios */
@@ -167,7 +167,7 @@ public class DiscussionServiceTest {
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
         /* Añadimos un usuario para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1);
+        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1, "");
         userProfileRepository.save(user1);
 
         Discussion d1 = new Discussion(TITL_1, user1, DES_1, new HashSet<>());
@@ -181,10 +181,10 @@ public class DiscussionServiceTest {
     @Test
     public void deleteDiscussionUnauthorizedUserTest() {
         /* Añadimos dos usuarios para que pueda añadir posts. */
-        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1);
+        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2);
+        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d1 = new Discussion(TITL_2, user1, DES_2, new HashSet<>());
@@ -198,7 +198,7 @@ public class DiscussionServiceTest {
     @Test
     public void deleteDiscussionTest() {
         /* Añadimos un usuario para que pueda añadir posts. */
-        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2);
+        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d1 = new Discussion(TITL_2, user2, DES_2, new HashSet<>());
@@ -222,7 +222,7 @@ public class DiscussionServiceTest {
 
     @Test
     public void createDiscussionTest() {
-        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1);
+        UserProfile user1 = new UserProfile(UP_1, UP_1_MAIL, UP_1, NUM_PHONE_1, "");
         userProfileRepository.save(user1);
         DiscussionDto disData = new DiscussionDto(null, TEST, null, null, UP_1, TEST, new ArrayList<>());
         ResponseEntity<Long> created = discussionService.createDiscussion(UP_1, disData);
@@ -237,11 +237,11 @@ public class DiscussionServiceTest {
 
     @Test
     public void updateDiscussionUnauthorizedUserTest() {
-        UserProfile user1 = new UserProfile(LUIS, UP_1_MAIL, UP_1, NUM_PHONE_1);
+        UserProfile user1 = new UserProfile(LUIS, UP_1_MAIL, UP_1, NUM_PHONE_1, "");
         userProfileRepository.save(user1);
         Discussion d1 = new Discussion(TITL_3, user1, DES_3, new HashSet<>());
         discussionRepository.save(d1);
-        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2);
+        UserProfile user2 = new UserProfile(UP_2, UP_2_MAIL, UP_2, NUM_PHONE_2, "");
         userProfileRepository.save(user2);
         DiscussionDto updatedDis = new DiscussionDto(null, null, null, null, LUIS, null, new ArrayList<>());
         ResponseEntity<Long> updated = discussionService.updateDiscussion(user2.getLogin(), updatedDis, d1.getId());
@@ -259,7 +259,7 @@ public class DiscussionServiceTest {
 
     @Test
     public void updateDiscussionUnexistentUserTest(){
-        UserProfile user1 = new UserProfile(LUIS, UP_1_MAIL, UP_1, NUM_PHONE_1);
+        UserProfile user1 = new UserProfile(LUIS, UP_1_MAIL, UP_1, NUM_PHONE_1, "");
         userProfileRepository.save(user1);
         Discussion d1 = new Discussion(TITL_1, user1, DES_2, new HashSet<>());
         discussionRepository.save(d1);
@@ -272,7 +272,7 @@ public class DiscussionServiceTest {
 
     @Test
     public void updateDiscussionTest() {
-        UserProfile user1 = new UserProfile(LUIS, UP_1_MAIL, UP_1, NUM_PHONE_1);
+        UserProfile user1 = new UserProfile(LUIS, UP_1_MAIL, UP_1, NUM_PHONE_1, "");
         userProfileRepository.save(user1);
         Discussion d1 = new Discussion(TITL_2, user1, DES_2, new HashSet<>());
         discussionRepository.save(d1);

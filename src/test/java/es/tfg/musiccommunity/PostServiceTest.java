@@ -120,7 +120,7 @@ public class PostServiceTest {
     public void getUser1AndUser2PostsTest() {
         /* PARA ESTE TEST ES INDIFERENTE ESTAR LOGEADO, YA QUE LA AUTORIZACIÓN SE REALIZA EN EN CONTROLLER */
         /* Añadimos a un usuario para que pueda añadir posts. */
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -145,7 +145,7 @@ public class PostServiceTest {
         Announcement a1 = new Announcement(TITULO_3, city, user1, DESCRIPCION_3, LocalDate.now().plusDays(1), CONTACT_PHONE_1, new HashSet<>());
         announcementRepository.save(a1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos 1 anuncio */
@@ -192,7 +192,7 @@ public class PostServiceTest {
     @Test
     public void getUnexistentTypePostsTest() {
         /* Añadimos a un usuario para que pueda añadir posts. */
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -226,7 +226,7 @@ public class PostServiceTest {
     @Test
     public void getUserPostsByTypeTest() {
         /* Añadimos a un usuario para que pueda añadir posts. */
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -265,7 +265,7 @@ public class PostServiceTest {
     @Test
     public void getPostsByUnexistentKeywordTest() {
         /* Añadimos a un usuario para que pueda añadir posts. */
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos 2 discusiones */
@@ -283,7 +283,7 @@ public class PostServiceTest {
     @Test
     public void getPostsByTypeAndKeywordTest() {
         /* Añadimos a un usuario para que pueda añadir posts. */
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -329,7 +329,7 @@ public class PostServiceTest {
     @Test
     public void getZeroClosestOrCloserPostsTest() {
         /* Añadimos a un usuario para que pueda añadir posts. */
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos 1 discusion y 1 anuncio */
@@ -354,7 +354,7 @@ public class PostServiceTest {
         City bb = new City(BILBAO, ESPANA, LATITUDE_BILBAO, LONGITUDE_BILBAO);
         cityRepository.save(bb);
 
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         HashSet<Tag> tags = new HashSet<>();
@@ -408,7 +408,7 @@ public class PostServiceTest {
         City bb = new City(BILBAO, ESPANA, LATITUDE_BILBAO, LONGITUDE_BILBAO);
         cityRepository.save(bb);
 
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         Announcement a2 = new Announcement(TITULO_3, bb, user1, DESCRIPCION_3, LocalDate.now().plusDays(1), CONTACT_PHONE_1, new HashSet<>());
@@ -430,7 +430,7 @@ public class PostServiceTest {
         City bb = new City(BILBAO, ESPANA, LATITUDE_BILBAO, LONGITUDE_BILBAO);
         cityRepository.save(bb);
 
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         HashSet<Tag> tags = new HashSet<>();
@@ -476,7 +476,7 @@ public class PostServiceTest {
     @Test
     public void getZeroCommentsPostTest() {
         /* Añadimos a un usuario para que pueda añadir posts. */
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         Discussion d1 = new Discussion(TITULO_2, user1, OLA, new HashSet<>());
@@ -496,10 +496,10 @@ public class PostServiceTest {
 
     @Test
     public void getCommentsPostTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d2 = new Discussion(TITULO_1, user1, ADIOS, new HashSet<>());
@@ -525,7 +525,7 @@ public class PostServiceTest {
 
     @Test
     public void makeCommentUnexistentPostTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         ResponseEntity<Long> postComments = postService.makeComment(USUARIO_1,-1L, 
@@ -536,7 +536,7 @@ public class PostServiceTest {
 
     @Test
     public void makeCommentTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         Discussion d1 = new Discussion(TITULO_2, user1, OLA, new HashSet<>());
@@ -563,7 +563,7 @@ public class PostServiceTest {
 
     @Test
     public void makeResponseUnexistentPostTest() {
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         ResponseEntity<Long> makeResponseResult = postService.makeResponseComment(user2.getLogin(), -1L, 1L, null);
@@ -572,7 +572,7 @@ public class PostServiceTest {
 
     @Test
     public void makeResponseUnexistentCommentTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         Discussion d2 = new Discussion(TITULO_1, user1, ADIOS, new HashSet<>());
@@ -585,10 +585,10 @@ public class PostServiceTest {
 
     @Test
     public void makeResponseTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d2 = new Discussion(TITULO_1, user1, ADIOS, new HashSet<>());
@@ -617,7 +617,7 @@ public class PostServiceTest {
 
     @Test
     public void deleteUnexistentUserTest() {
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d2 = new Discussion(TITULO_1, user2, ADIOS, new HashSet<>());
@@ -632,10 +632,10 @@ public class PostServiceTest {
 
     @Test
     public void deleteUnauthorizedUserTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d1 = new Discussion(TITULO_2, user1, OLA, new HashSet<>());
@@ -650,7 +650,7 @@ public class PostServiceTest {
 
     @Test
     public void deleteCommentTest() {
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d2 = new Discussion(TITULO_1, user2, ADIOS, new HashSet<>());

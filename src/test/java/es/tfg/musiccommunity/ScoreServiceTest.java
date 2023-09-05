@@ -82,7 +82,7 @@ public class ScoreServiceTest {
 
     @Test
     public void getZeroUserScoresTest() {
-        UserProfile user = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user);
 
         ResponseEntity<List<ScoreDto>> scores = scoreService.getUserScores(user.getLogin(), false);
@@ -104,10 +104,10 @@ public class ScoreServiceTest {
         FileInputStream input2 = new FileInputStream(prueba2);
         MultipartFile multipart2 = new MockMultipartFile(prueba2.getName(), prueba2.getName(), PDF_EXT, input2);
 
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Score newScore1 = new Score(multipart.getOriginalFilename(), multipart.getContentType(), multipart.getBytes(), user1);
@@ -136,7 +136,7 @@ public class ScoreServiceTest {
 
     @Test
     public void getZeroUserScoresByKeywordTest() throws IOException {
-        UserProfile user = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user);
 
         File prueba = new File(FILE_TEST);
@@ -169,10 +169,10 @@ public class ScoreServiceTest {
         FileInputStream input3 = new FileInputStream(prueba3);
         MultipartFile multipart3 = new MockMultipartFile(prueba3.getName(), prueba3.getName(), PDF_EXT, input3);
 
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Score newScore1 = new Score(multipart.getOriginalFilename(), multipart.getContentType(), multipart.getBytes(), user1);
@@ -205,10 +205,10 @@ public class ScoreServiceTest {
 
     @Test
     public void deleteUnexistentOrUnauthorizedUserScoreTest() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         File prueba = new File(FILE_PRUEBA);
@@ -227,7 +227,7 @@ public class ScoreServiceTest {
 
     @Test
     public void deleteScoreTest() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         File prueba = new File(FILE_PRUEBA);
@@ -274,7 +274,7 @@ public class ScoreServiceTest {
         FileInputStream input2 = new FileInputStream(prueba2);
         MultipartFile multipart2 = new MockMultipartFile(prueba2.getName(), prueba2.getName(), PDF_EXT, input2);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         //Invalida por '..'
@@ -302,7 +302,7 @@ public class ScoreServiceTest {
         FileInputStream input2 = new FileInputStream(prueba2);
         MultipartFile multipart2 = new MockMultipartFile(prueba2.getName(), prueba2.getName(), PDF_EXT, input2);
 
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         ResponseEntity<Long> errorUnexistentUser = scoreService.storeScore(multipart2, user1.getLogin());
@@ -331,13 +331,13 @@ public class ScoreServiceTest {
         FileInputStream input3 = new FileInputStream(prueba3);
         MultipartFile multipart3 = new MockMultipartFile(prueba3.getName(), prueba3.getName(), PDF_EXT, input3);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Score newScore3 = new Score(multipart3.getOriginalFilename(), multipart3.getContentType(), multipart3.getBytes(), user2);
         scoreRepository.save(newScore3);
 
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         //Probamos ScoreInfo y ScoreFile juntas porque hacen los mismo, aunque una devulva solo el dto, y la otra el recurso
@@ -350,9 +350,9 @@ public class ScoreServiceTest {
 
     @Test
     public void getScoreInfoTest() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         File prueba = new File(FILE_PRUEBA);
@@ -386,9 +386,9 @@ public class ScoreServiceTest {
 
     @Test
     public void getScoreFileTest() throws IOException {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         File prueba = new File(FILE_PRUEBA);

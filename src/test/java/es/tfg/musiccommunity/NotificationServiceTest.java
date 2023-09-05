@@ -69,10 +69,10 @@ public class NotificationServiceTest {
     private static final String DESCRIPTION = "description";
 
     @Test
-    public void notifyNewFollowerTest(){
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+    public void notifyNewFollowerTest() {
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
 
         ResponseEntity<List<NotificationDto>> beforeNotifsUser2 = notificationService.getNotifications(u2.getLogin(), true);
@@ -90,12 +90,12 @@ public class NotificationServiceTest {
     }
 
     @Test
-    public void notifyNewPostTest(){
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+    public void notifyNewPostTest()  {
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
-        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3);
+        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3, "");
         userProfileRepository.save(u3);
 
         userProfileService.followUser(u1.getLogin(), u2.getLogin());
@@ -127,10 +127,10 @@ public class NotificationServiceTest {
     }
 
     @Test
-    public void notifyNewPostCommentedTest(){
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+    public void notifyNewPostCommentedTest()  {
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
-        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3);
+        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3, "");
         userProfileRepository.save(u3);
 
         userProfileService.followUser(u3.getLogin(), u2.getLogin());
@@ -162,10 +162,10 @@ public class NotificationServiceTest {
     }
 
     @Test
-    public void notifyNewRecommendationTest(){
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+    public void notifyNewRecommendationTest()  {
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
 
         userProfileService.followUser(u1.getLogin(), u2.getLogin());
@@ -189,12 +189,12 @@ public class NotificationServiceTest {
     }
 
     @Test
-    public void notifyNewRatedRecommendationTest(){
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+    public void notifyNewRatedRecommendationTest()  {
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
-        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3);
+        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3, "");
         userProfileRepository.save(u3);
 
         userProfileService.followUser(u1.getLogin(), u2.getLogin());
@@ -229,10 +229,10 @@ public class NotificationServiceTest {
     }
 
     @Test
-    public void getReadAndUnreadUserNotificationsTest(){
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+    public void getReadAndUnreadUserNotificationsTest()  {
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
 
         userProfileService.followUser(u1.getLogin(), u2.getLogin());
@@ -257,10 +257,10 @@ public class NotificationServiceTest {
     }
 
     @Test
-    public void markAsReadTest(){
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+    public void markAsReadTest()  {
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
-        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3);
+        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3, "");
         userProfileRepository.save(u3);
 
         userProfileService.followUser(u2.getLogin(), u3.getLogin());

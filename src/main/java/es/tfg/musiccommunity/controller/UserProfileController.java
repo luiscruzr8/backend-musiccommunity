@@ -2,6 +2,7 @@ package es.tfg.musiccommunity.controller;
 
 import java.util.List;
 
+import com.google.firebase.messaging.FirebaseMessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -73,7 +74,7 @@ public class UserProfileController {
     }
 
     @PostMapping("/user/followers")
-    public ResponseEntity<Void> followUser(Authentication auth, @RequestParam(value="subscribeTo", required=true) String subscribeTo) {
+    public ResponseEntity<Void> followUser(Authentication auth, @RequestParam(value="subscribeTo", required=true) String subscribeTo) throws FirebaseMessagingException {
         String login = auth.getName();
         return userProfileService.followUser(login, subscribeTo);
     }

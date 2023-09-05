@@ -85,7 +85,7 @@ public class RecommendationServiceTest {
 
     @Test
     public void getZeroUserRecommendationsTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
         ResponseEntity<List<RecommendationDto>> zeroUserRecommendations = recommendationService.getUserRecommendations(USUARIO_1,false,"TITULO_1");
         Assert.assertEquals(HttpStatus.OK, zeroUserRecommendations.getStatusCode());
@@ -98,10 +98,10 @@ public class RecommendationServiceTest {
 
     @Test
     public void getRecommendationsTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Tag t1 = new Tag(ETIQUETA_1);
@@ -136,10 +136,10 @@ public class RecommendationServiceTest {
 
     @Test
     public void getUserRecommendationsTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Tag t1 = new Tag(ETIQUETA_1);
@@ -186,9 +186,9 @@ public class RecommendationServiceTest {
 
     @Test
     public void getRecommendationInfoTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Tag t1 = new Tag(ETIQUETA_1);
@@ -230,7 +230,7 @@ public class RecommendationServiceTest {
         Assert.assertEquals(HttpStatus.NOT_FOUND, createdUnexistentUser.getStatusCode());
         Assert.assertEquals(null, createdUnexistentUser.getBody());
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         ResponseEntity<Long> createdUnexistentPost = recommendationService.createRecommendation(USUARIO_2, recDto);
@@ -240,7 +240,7 @@ public class RecommendationServiceTest {
 
     @Test
     public void createRecommendationTest() {
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d1 = new Discussion(TITULO_1, user2, DESCRIPCION_1, new HashSet<>());
@@ -266,10 +266,10 @@ public class RecommendationServiceTest {
 
     @Test
     public void deleteUnexistentOrUnauthorizedUserRecommendationTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d2 = new Discussion(TITULO_2, user1, DESCRIPCION_2, new HashSet<>());
@@ -289,7 +289,7 @@ public class RecommendationServiceTest {
 
     @Test
     public void deleteRecommendationTest() {
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d1 = new Discussion(TITULO_1, user2, DESCRIPCION_1, new HashSet<>());
@@ -322,10 +322,10 @@ public class RecommendationServiceTest {
 
     @Test
     public void updateUnexistentOrUnauthorizedUserRecommendationTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d1 = new Discussion(TITULO_1, user1, DESCRIPCION_1, new HashSet<>());
@@ -349,7 +349,7 @@ public class RecommendationServiceTest {
     @Test
     public void updateRecommendationTest() {
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d2 = new Discussion(TITULO_2, user2, DESCRIPCION_2, new HashSet<>());
@@ -378,7 +378,7 @@ public class RecommendationServiceTest {
         Assert.assertEquals(HttpStatus.NOT_FOUND, unexistentUser.getStatusCode());
         Assert.assertEquals(null, unexistentUser.getBody());
 
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
         ResponseEntity<Long> unexistentRecommendation = recommendationService.rateRecommendation(user1.getLogin(), -1L, 6);
@@ -388,10 +388,10 @@ public class RecommendationServiceTest {
 
     @Test
     public void rateRecommendationTest() {
-        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1);
+        UserProfile user1 = new UserProfile(USUARIO_1, USUARIO_1_MAIL, USUARIO_1, PHONE_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2);
+        UserProfile user2 = new UserProfile(USUARIO_2, USUARIO_2_MAIL, USUARIO_2, PHONE_2, "");
         userProfileRepository.save(user2);
 
         Discussion d2 = new Discussion(TITULO_2, user2, DESCRIPCION_2, new HashSet<>());

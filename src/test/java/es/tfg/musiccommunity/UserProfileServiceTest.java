@@ -68,22 +68,22 @@ public class UserProfileServiceTest {
 
     @Test
     public void registerUserLoginOrEmailAlreadyUsedOrInvalidPhoneTest() {
-        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, PHONE_3);
+        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, PHONE_3, "");
         userProfileRepository.save(luisin);
         Set<String> roles = new HashSet<>();
         roles.add("user");
 
-        SignUpForm newUserToRegister = new SignUpForm(LUISIN, LUISIN_MAIL, roles, LUISIN, PHONE_3);
+        SignUpForm newUserToRegister = new SignUpForm(LUISIN, LUISIN_MAIL, roles, LUISIN, PHONE_3, "");
         ResponseEntity<ResponseMessage> errorLogin = userProfileService.registerUser(newUserToRegister);
         Assert.assertEquals("El login ya está en uso!", errorLogin.getBody().getMessage());
         Assert.assertEquals(HttpStatus.BAD_REQUEST, errorLogin.getStatusCode());
 
-        SignUpForm newUserToRegister2 = new SignUpForm(TEST_1, LUISIN_MAIL, roles, LUISIN, PHONE_3);
+        SignUpForm newUserToRegister2 = new SignUpForm(TEST_1, LUISIN_MAIL, roles, LUISIN, PHONE_3, "");
         ResponseEntity<ResponseMessage> errorEmail = userProfileService.registerUser(newUserToRegister2);
         Assert.assertEquals("El email ya está en uso!", errorEmail.getBody().getMessage());
         Assert.assertEquals(HttpStatus.BAD_REQUEST, errorEmail.getStatusCode());
 
-        SignUpForm newUserToRegister3 = new SignUpForm(TEST_1, TEST_2_MAIL, roles, LUISIN, UNEXISTENT);
+        SignUpForm newUserToRegister3 = new SignUpForm(TEST_1, TEST_2_MAIL, roles, LUISIN, UNEXISTENT, "");
         ResponseEntity<ResponseMessage> errorPhone = userProfileService.registerUser(newUserToRegister3);
         Assert.assertEquals("Número de teléfono inválido!", errorPhone.getBody().getMessage());
         Assert.assertEquals(HttpStatus.BAD_REQUEST, errorPhone.getStatusCode());
@@ -93,7 +93,7 @@ public class UserProfileServiceTest {
     public void registerUserNoRoleTest() {
         Set<String> roles = new HashSet<>();
         roles.add("user");
-        SignUpForm newUserToRegister = new SignUpForm(LUISIN, LUISIN_MAIL, roles, LUISIN, PHONE_3);
+        SignUpForm newUserToRegister = new SignUpForm(LUISIN, LUISIN_MAIL, roles, LUISIN, PHONE_3,"");
         userProfileService.registerUser(newUserToRegister);
     }
 
@@ -103,7 +103,7 @@ public class UserProfileServiceTest {
         roleRepository.save(r);
         Set<String> roles = new HashSet<>();
         roles.add("user");
-        SignUpForm newUserToRegister = new SignUpForm(LUISIN, LUISIN_MAIL, roles, LUISIN, PHONE_3);
+        SignUpForm newUserToRegister = new SignUpForm(LUISIN, LUISIN_MAIL, roles, LUISIN, PHONE_3,"");
         ResponseEntity<ResponseMessage> success = userProfileService.registerUser(newUserToRegister);
         Assert.assertEquals("Usuario registrado correctamente!", success.getBody().getMessage());
         Assert.assertEquals(HttpStatus.OK, success.getStatusCode());
@@ -115,10 +115,10 @@ public class UserProfileServiceTest {
         roleRepository.save(r);
         Set<String> roles = new HashSet<>();
         roles.add("user");
-        SignUpForm newUserToRegister = new SignUpForm(TEST_1, TEST_1_MAIL, roles, TEST_1, PHONE_1);
+        SignUpForm newUserToRegister = new SignUpForm(TEST_1, TEST_1_MAIL, roles, TEST_1, PHONE_1,"");
         userProfileService.registerUser(newUserToRegister);
 
-        LoginForm authLogin = new LoginForm(TEST_1, TEST_1);
+        LoginForm authLogin = new LoginForm(TEST_1, TEST_1, "");
         ResponseEntity<JwtResponse> loginSuccess = userProfileService.authenticateUser(authLogin);
         Assert.assertEquals(1, loginSuccess.getBody().getAuthorities().size());
         Assert.assertEquals(TEST_1, loginSuccess.getBody().getUsername());
@@ -128,7 +128,7 @@ public class UserProfileServiceTest {
 
     @Test
     public void createUserSuccessFullTest() {
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
 
         userProfileRepository.save(u1);
 
@@ -146,7 +146,7 @@ public class UserProfileServiceTest {
 
     @Test(expected = InvalidDataAccessApiUsageException.class)
     public void createUserFailTest() {
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
 
         userProfileRepository.findById(u1.getId()).get();
     }
@@ -160,9 +160,9 @@ public class UserProfileServiceTest {
 
     @Test
     public void getAllUsersTest() {
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
-        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3);
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
+        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3, "");
         userProfileRepository.save(u1);
         userProfileRepository.save(u2);
         Tag t1 = new Tag(ETIQUETA_1);
@@ -188,7 +188,7 @@ public class UserProfileServiceTest {
 
     @Test
     public void getUserInfoTest() {
-        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, PHONE_3);
+        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, PHONE_3, "");
         Tag t1 = new Tag(ETIQUETA_1);
         Tag t2 = new Tag(ETIQUETA_2);
         tagRepository.save(t1);
@@ -226,7 +226,7 @@ public class UserProfileServiceTest {
 
     @Test
     public void updateUserInfoTest() {
-        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, PHONE_3);
+        UserProfile luisin = new UserProfile(LUISIN, LUISIN_MAIL, LUISIN, PHONE_3, "");
         userProfileRepository.save(luisin);
         TagDto t1 = new TagDto(ETIQUETA_1);
         TagDto t2 = new TagDto(ETIQUETA_2);
@@ -256,9 +256,9 @@ public class UserProfileServiceTest {
 
     @Test
     public void getFollowersAndFollowingTest() {
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
-        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3);
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
+        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3, "");
         userProfileRepository.save(u1);
         Tag t1 = new Tag(ETIQUETA_1);
         Tag t2 = new Tag(ETIQUETA_2);
@@ -311,7 +311,7 @@ public class UserProfileServiceTest {
         Assert.assertEquals(null, unexistentUserAmIFollowerUnexistentUser.getBody());
         Assert.assertEquals(HttpStatus.NOT_FOUND, unexistentUserAmIFollowerUnexistentUser.getStatusCode());
 
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
 
         ResponseEntity<Boolean> userAmIFollowerUnexistentUser = userProfileService.amIFollower(u1.getLogin(), UNEXISTENT);
@@ -324,10 +324,10 @@ public class UserProfileServiceTest {
     }
 
     @Test
-    public void amIFollowerTest(){
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+    public void amIFollowerTest()  {
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
 
         ResponseEntity<Boolean> amIFollower = userProfileService.amIFollower(u1.getLogin(), u2.getLogin());
@@ -342,12 +342,12 @@ public class UserProfileServiceTest {
     }
 
     @Test
-    public void unexistentUserFollowUnexistentUserTest(){
+    public void unexistentUserFollowUnexistentUserTest()  {
         ResponseEntity<Void> unexistentUserFollowUnexistentUser = userProfileService.followUser(UNEXISTENT, UNEXISTENT);
         Assert.assertEquals(null, unexistentUserFollowUnexistentUser.getBody());
         Assert.assertEquals(HttpStatus.NOT_FOUND, unexistentUserFollowUnexistentUser.getStatusCode());
 
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
 
         ResponseEntity<Void> userFollowUnexistentUser = userProfileService.followUser(u1.getLogin(), UNEXISTENT);
@@ -360,10 +360,10 @@ public class UserProfileServiceTest {
     }
 
     @Test
-    public void followUserTest(){
-        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1);
+    public void followUserTest()  {
+        UserProfile u1 = new UserProfile(TEST_1, TEST_1_MAIL, TEST_1, PHONE_1, "");
         userProfileRepository.save(u1);
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
 
         ResponseEntity<Void> followUser = userProfileService.followUser(u1.getLogin(), u2.getLogin());
@@ -381,7 +381,7 @@ public class UserProfileServiceTest {
         Assert.assertEquals(null, unexistentUserUnfollowUnexistentUser.getBody());
         Assert.assertEquals(HttpStatus.NOT_FOUND, unexistentUserUnfollowUnexistentUser.getStatusCode());
 
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
 
         ResponseEntity<Void> userUnfollowUnexistentUser = userProfileService.unfollowUser(u2.getLogin(), UNEXISTENT);
@@ -394,11 +394,11 @@ public class UserProfileServiceTest {
     }
 
     @Test
-    public void unfollowUserTest(){
+    public void unfollowUserTest() {
         
-        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2);
+        UserProfile u2 = new UserProfile(TEST_2, TEST_2_MAIL, TEST_2, PHONE_2, "");
         userProfileRepository.save(u2);
-        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3);
+        UserProfile u3 = new UserProfile(TEST_3, TEST_3_MAIL, TEST_3, PHONE_3, "");
         userProfileRepository.save(u3);
 
         userProfileService.followUser(u2.getLogin(), u3.getLogin());

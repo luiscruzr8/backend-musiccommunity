@@ -81,7 +81,7 @@ public class UserProfile{
 
     public UserProfile() {}
 
-    public UserProfile(String login, String email, String password, String phone) {
+    public UserProfile(String login, String email, String password, String phone, String firebaseToken) {
         this.phone = phone;
         this.login = login;
         this.email = email;
@@ -90,7 +90,7 @@ public class UserProfile{
         this.interests = new HashSet<>();
         this.followers = new HashSet<>();
         this.following = new HashSet<>();
-        this.firebaseToken = "";
+        this.firebaseToken = firebaseToken;
     }
 
     public Long getId() {

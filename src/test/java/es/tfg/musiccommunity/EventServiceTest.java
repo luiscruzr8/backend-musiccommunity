@@ -92,7 +92,7 @@ public class EventServiceTest {
     @Test
     public void getAllEventsTest(){
         /* Añadimos a un usuario para que pueda añadir posts. */
-        UserProfile user = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -144,9 +144,9 @@ public class EventServiceTest {
     @Test
     public void getEventInfoTest() {
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2);
+        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -184,7 +184,7 @@ public class EventServiceTest {
         Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
         /* Añadimos un usuario para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -203,10 +203,10 @@ public class EventServiceTest {
     @Test
     public void deleteEventUnauthorizedUserTest() {
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2);
+        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -225,9 +225,9 @@ public class EventServiceTest {
     @Test
     public void deleteEventTest() {
         /* Añadimos dos usuarios para que puedan añadir posts. */
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
-        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2);
+        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -290,7 +290,7 @@ public class EventServiceTest {
         Assert.assertEquals(HttpStatus.NOT_FOUND, created.getStatusCode());
         Assert.assertEquals(null, created.getBody());
 
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
         /* NO EXISTE LA CIUDAD */
         ResponseEntity<Long> created2 = eventService.createEvent(user1.getLogin(), evData);
@@ -309,7 +309,7 @@ public class EventServiceTest {
     
     @Test
     public void createEventTest(){
-        UserProfile user1 = new UserProfile(LUISIN, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(LUISIN, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
         City city = new City(BARCELONA, ESPANA, LATITUDE_BARCELONA, LONGITUDE_BARCELONA);
         cityRepository.save(city);
@@ -373,7 +373,7 @@ public class EventServiceTest {
 
     @Test
     public void updateEventUnexistentUserTest(){
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -392,10 +392,10 @@ public class EventServiceTest {
 
     @Test
     public void updateEventUnauthorizedUserTest(){
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2);
+        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -414,10 +414,10 @@ public class EventServiceTest {
 
     @Test
     public void updatedEventUnexistentCityTest(){
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
 
-        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2);
+        UserProfile user2 = new UserProfile(USUAR_2, USUAR_2_MAIL, USUAR_2, PHONE_NUM_2, "");
         userProfileRepository.save(user2);
 
         /* Añadimos una ciudad para que pueda añadir posts */
@@ -435,7 +435,7 @@ public class EventServiceTest {
 
     @Test
     public void updateEventTest() {
-        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1);
+        UserProfile user1 = new UserProfile(USUAR_1, USUAR_1_MAIL, USUAR_1, PHONE_NUM_1, "");
         userProfileRepository.save(user1);
         City city = new City(VALENCIA, ESPANA, LATITUDE_VALENCIA, LONGITUDE_VALENCIA);
         cityRepository.save(city);
