@@ -3,17 +3,7 @@ package es.tfg.musiccommunity.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -27,6 +17,9 @@ import org.hibernate.annotations.NaturalId;
     }),
     @UniqueConstraint(columnNames = {
         "email"
+    }),
+    @UniqueConstraint(columnNames = {
+        "firebase_token"
     })
 })
 public class UserProfile{
@@ -83,6 +76,9 @@ public class UserProfile{
     @ManyToMany(mappedBy = "followers")
     private Set<UserProfile> following;
 
+    @Column(name = "firebase_token")
+    private String firebaseToken;
+
     public UserProfile() {}
 
     public UserProfile(String login, String email, String password, String phone) {
@@ -94,6 +90,7 @@ public class UserProfile{
         this.interests = new HashSet<>();
         this.followers = new HashSet<>();
         this.following = new HashSet<>();
+        this.firebaseToken = "";
     }
 
     public Long getId() {
@@ -173,7 +170,6 @@ public class UserProfile{
         follower.following.add(this);
     }
 
-    
     public Set<UserProfile> getFollowing() {
         return following;
     }
@@ -184,5 +180,13 @@ public class UserProfile{
 
     public void addFollowing(UserProfile followed) {
         followed.addFollower(this);
+    }
+
+    public String getFirebaseToken() {
+        return firebaseToken;
+    }
+
+    public void setFirebaseToken(String firebaseToken) {
+        this.firebaseToken = firebaseToken;
     }
 }
